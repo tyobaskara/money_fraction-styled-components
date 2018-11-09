@@ -20,4 +20,4 @@
 - npm run dev
 
 # Live
-- https://money-fraction.herokuapp.com/
+- https://moneyfractionv2.herokuapp.com/
