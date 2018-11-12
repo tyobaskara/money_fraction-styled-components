@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ListResult, List } from '../style/components/FractionResult';
 
-class FractionResult extends Component {
+class FractionResult extends React.PureComponent {
   render() {
     const { fractions } = this.props;
-      
+
     const renderFraction = fractions.map((fraction, key) => {
         return (
             <List key={key}>

@@ -1,10 +1,14 @@
 import { 
     GET_HEADER_TITLE,
-    REMOVE_HEADER_TITLE
+    REMOVE_HEADER_TITLE,
+    SWITCH_THEME
  } from '../actions/types';
 
+ import * as themes from '../style/themes';
+
 const initialState = {
-    title: ''
+    title: '',
+    theme: themes.light
 }
 
 export default function (state = initialState, action) {
@@ -17,6 +21,11 @@ export default function (state = initialState, action) {
         case REMOVE_HEADER_TITLE:
             return {
                 ...initialState
+            }
+        case SWITCH_THEME:
+            return {
+                ...state,
+                theme: action.payload
             }
         default:
             return state;

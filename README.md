@@ -5,7 +5,7 @@
 - reactjs
 - redux
 - express
-- styled-components
+- styled-components with dark mode toggle
 
 # Regex
 - Examples of valid inputs with their canonical equivalents 18.215 (18215), Rp17500 (17500), Rp17.500,00 (17500), Rp 120.325 (120325), 005.000 (5000), 001000 (1000)

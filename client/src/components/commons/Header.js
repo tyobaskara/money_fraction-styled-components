@@ -6,11 +6,11 @@ import Nav from './Nav';
 
 class Header extends React.Component {
     render() {
-        const { title } = this.props.header;
+        const { title, theme } = this.props.header;
 
         return (
             <HeaderWrap>
-                { title && <Nav title={ title }/> }
+                { title && <Nav title={ title } theme={theme}/> }
             </HeaderWrap>
         )
     }

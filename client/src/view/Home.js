@@ -5,6 +5,11 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { setHeaderTitle } from '../actions/headerActions';
 
+// Theme
+import { ThemeProvider } from 'styled-components';
+import * as themes from '../style/themes';
+import ThemeContext from '../style/themes/context';
+
 // component
 import FractionForm from '../components/FractionForm';
 import FractionResult from '../components/FractionResult';
@@ -34,7 +39,7 @@ class Home extends React.Component {
         e.preventDefault();
         const { input } = this.state;
 
-        if(input !== '' && input != '0' && currencyFormat(input)) {
+        if(input !== '' && input >= 50 && currencyFormat(input)) {
             const fractionArray = getFraction(getNumber(input));
             const countFraction = getCountFraction(fractionArray);
 
@@ -43,9 +48,12 @@ class Home extends React.Component {
         else {
             this.setState({ fractions: [], isValid: false });
         }
+
+        console.log(this.state);
     }
 
     render() {
+        const { header } = this.props;
         const { input, fractions, isValid } = this.state;
 
         return (
@@ -53,14 +61,22 @@ class Home extends React.Component {
                 <Helmet>
                     <title>Money Fraction</title>
                 </Helmet>
-                
-                <div className="has-header-fixed">
-                    <FractionForm value={input} onSubmit={this.onSubmit} onChange={this.onChange} isValid={isValid} />
 
-                    <FractionResult fractions={fractions}/>
+                <ThemeContext.Provider value={header.theme}>
+                    <ThemeContext.Consumer>
+                        {theme => (
+                            <ThemeProvider theme={theme}>
+                                <div className="has-header-fixed">
+                                    <FractionForm value={input} onSubmit={this.onSubmit} onChange={this.onChange} isValid={isValid} theme={theme}/>
+
+                                    <FractionResult fractions={fractions} theme={theme}/>
                     
-                    {/*<img src={require('../../static/images/no_pic.png')} alt="no pic"/>*/}
-                </div>
+                                    {/* <img src={require('../../static/images/no_pic.png')} alt="no pic"/>                 */}
+                                </div>
+                            </ThemeProvider>
+                        )}
+                    </ThemeContext.Consumer>
+                </ThemeContext.Provider>
             </React.Fragment>
         );
     }
@@ -68,10 +84,15 @@ class Home extends React.Component {
 };
 
 Home.propTypes = {
-    setHeaderTitle: PropTypes.func.isRequired
+    setHeaderTitle: PropTypes.func.isRequired,
+    header: PropTypes.object.isRequired
 };
+
+const mapStateToProps = state => ({
+    header: state.header
+});
 
 // export default withRouter(Home);
 export default withRouter(
-    connect(null, { setHeaderTitle })(Home)
+    connect(mapStateToProps, { setHeaderTitle })(Home)
 );

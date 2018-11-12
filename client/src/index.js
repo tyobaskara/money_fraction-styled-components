@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, browserHistory, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+
 require('../static/favicon.ico');
 import style from './style/app.scss';
 
