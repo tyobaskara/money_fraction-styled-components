@@ -48,8 +48,6 @@ class Home extends React.Component {
         else {
             this.setState({ fractions: [], isValid: false });
         }
-
-        console.log(this.state);
     }
 
     render() {
